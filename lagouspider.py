@@ -11,19 +11,20 @@ import json
 import requests
 import xlwt
 import time
-
+from urllib.parse import quote
 
 # 获取存储职位信息的json对象，遍历获得公司名、福利待遇、工作地点、学历要求、工作类型、发布时间、职位名称、薪资、工作年限
 def get_json(url, datas):
+    kd = quote(datas[2])
     my_headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36",
-        "Referer": "https://www.lagou.com/jobs/list_{}?city=%E5%85%A8%E5%9B%BD&cl=false&fromSearch=true&labelWords=&suginput=",
-        "Content-Type": "application/x-www-form-urlencoded;charset = UTF-8".format(datas[2])
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36",
+        "Referer": "https://www.lagou.com/jobs/list_{}?city=%E5%85%A8%E5%9B%BD&cl=false&fromSearch=true&labelWords=&suginput=".format(kd),
+        "Content-Type": "application/x-www-form-urlencoded;charset = UTF-8"
     }
-    time.sleep(5)
+    time.sleep(3)
     ses = requests.session()  # 获取session
     ses.headers.update(my_headers)  # 更新
-    ses.get("https://www.lagou.com/jobs/list_{}?city=%E5%85%A8%E5%9B%BD&cl=false&fromSearch=true&labelWords=&suginput=".format(datas[2]))
+    ses.get("https://www.lagou.com/jobs/list_{}?city=%E5%85%A8%E5%9B%BD&cl=false&fromSearch=true&labelWords=&suginput=".format(kd))
     content = ses.post(url=url, data=datas)
     result = content.json()
     info = result['content']['positionResult']['result']
@@ -50,7 +51,8 @@ def get_json(url, datas):
 
 def main():
     page = int(input('请输入你要抓取的页码总数：'))
-    kw = str(input('请输入你要抓取的职位关键字：'))
+    keyword = str(input('请输入你要抓取的职位关键字：'))
+
     # city = input('请输入你要抓取的城市：')
 
     info_result = []
@@ -61,7 +63,7 @@ def main():
         datas = {
             'first': 'false',
             'pn': x,
-            'kd': kw,
+            'kd': keyword,
         }
         try:
             info = get_json(url, datas)
