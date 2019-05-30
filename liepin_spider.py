@@ -1,10 +1,10 @@
 # coding=utf-8
 """
 @author:diwugu
-@data:2019/5/25
+@title：liepin_spider
+@data:2019/5/30
 @version:Python3.7
 源码来源于网上，经过修改调整，框架比较清晰，而且提供三种网页解析提取方法选择，适合学习，而且可以尝试修改成一个招聘网站类的爬虫框架，
-但是运行速度稍慢，待后期优化
 """
 import xlwt
 from bs4 import BeautifulSoup
@@ -64,11 +64,6 @@ class Spider(object):
         page = input('请输入爬取页数:')
         page = int(page)
         for i in range(0, page):
-            """
-            url = 'https://www.liepin.com/zhaopin/?industryType=&jobKind=&sortFlag=15&degradeFlag=0&industries=&salary=&compscale=&key={}' \
-                  '&clean_condition=&headckid=4a4adb68b22970bd&d_pageSize=40&siTag=p_XzVCa5J0EfySMbVjghcw~fA9rXquZc5IkJpXC-Ycixw&d_headId' \
-                  '=62ac45351cdd7a103ac7d50e1142b2a0&d_ckId=62ac45351cdd7a103ac7d50e1142b2a0&d_sfrom=search_fp&d_curPage=0&curPage={}'.format(keyword,i)
-            """
             url = "https://www.liepin.com/zhaopin/?init=-1&headckid=4a4adb68b22970bd&fromSearchBtn=2&dqs=050090&salary=&sortFlag=15&" \
                   "degradeFlag=0&ckid=9ff79b8db0def83a&industryType=&jobKind=2&industries=&compscale=&key={}&clean_condition=" \
                   "&siTag=4N1aKWTD0M8alp0XOKF4Mg~rM22-1egSu-XqEHDTXvufA&d_sfrom=search_prime&d_ckId=065ef2eb67584c130bdd2db595fdb380&d_curPage=0" \
