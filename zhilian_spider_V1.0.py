@@ -1,4 +1,7 @@
 """
+@author:Danny
+@title:zhilian_spider
+@date:2019-5-30
 本次的数据爬取只做简单的反爬虫预防策略
 """
 import requests
