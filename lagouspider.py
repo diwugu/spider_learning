@@ -2,9 +2,8 @@
 # encoding: utf-8
 """
 Created on 19-5-05
-@title: ''
-@author: Xusl
-源码来源于知乎：https://zhuanlan.zhihu.com/p/65081383
+@title: lagouspider
+@author: Danny
 """
 
 import json
@@ -16,13 +15,15 @@ from urllib.parse import quote
 # 获取存储职位信息的json对象，遍历获得公司名、福利待遇、工作地点、学历要求、工作类型、发布时间、职位名称、薪资、工作年限
 def get_json(url, datas):
     kd = quote(datas[2])
+    #进行编码
     my_headers = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36",
         "Referer": "https://www.lagou.com/jobs/list_{}?city=%E5%85%A8%E5%9B%BD&cl=false&fromSearch=true&labelWords=&suginput=".format(kd),
         "Content-Type": "application/x-www-form-urlencoded;charset = UTF-8"
     }
     time.sleep(3)
-    ses = requests.session()  # 获取session
+    #设置休眠时间，避免频繁获取，封IP
+    ses = requests.session()  # 获取session5081383
     ses.headers.update(my_headers)  # 更新
     ses.get("https://www.lagou.com/jobs/list_{}?city=%E5%85%A8%E5%9B%BD&cl=false&fromSearch=true&labelWords=&suginput=".format(kd))
     content = ses.post(url=url, data=datas)
