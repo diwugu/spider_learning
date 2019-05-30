@@ -1,6 +1,5 @@
-# _author:'DJS'
-# date:2018-11-19
-# https: // blog.csdn.net / djs123DJS / article / details / 84591417
+# _author:Danny
+# date:2019-05-30
 # 该段代码主要查询深圳地区（网站编码为040000），后续可在url内设置代码更改为变量，自由输入选定区域
 
 import csv
